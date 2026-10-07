@@ -1,0 +1,29 @@
+import type { ComponentProps } from 'react'
+import { ChevronDown } from 'lucide-react'
+import { cn } from '@/lib/utils'
+
+
+export function NativeSelect({
+  className,
+  selectClassName,
+  children,
+  ...props
+}: ComponentProps<'select'> & { selectClassName?: string }) {
+  return (
+    <div className={cn('relative', className)}>
+      <select
+        className={cn(
+          'h-full w-full cursor-pointer appearance-none rounded-md border border-input bg-background px-4 pr-10 text-sm text-foreground outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring',
+          selectClassName,
+        )}
+        {...props}
+      >
+        {children}
+      </select>
+      <ChevronDown
+        className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground"
+        aria-hidden="true"
+      />
+    </div>
+  )
+}

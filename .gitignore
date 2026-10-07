@@ -1,0 +1,10 @@
+node_modules
+dist
+*.local
+.env
+.DS_Store
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/lighthouse/runs/

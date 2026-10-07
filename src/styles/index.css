@@ -1,0 +1,193 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Tokens da identidade visual Kurio (Figma).
+ * Fundo #140D0A, texto #F5F1EB, botões e itens selecionados #D28A4C.
+ * Contraste: #D28A4C sobre #140D0A ≈ 6.9:1 (texto do botão usa o próprio fundo escuro, ≈ 6.9:1).
+ * Superfícies, bordas e texto secundário são derivados da paleta (tons de marrom) — ver ARCHITECTURE.md.
+ */
+:root {
+  --radius: 0.5rem;
+  --background: #140d0a;
+  --foreground: #f5f1eb;
+  --card: #1f1511;
+  --card-foreground: #f5f1eb;
+  --surface: #261a14;
+  --popover: #261a14;
+  --popover-foreground: #f5f1eb;
+  --primary: #d28a4c;
+  --primary-hover: #e09a5d;
+  --brand: #d28a4c;
+  --primary-foreground: #140d0a;
+  --secondary: #261a14;
+  --secondary-foreground: #f5f1eb;
+  --muted: #261a14;
+  --muted-foreground: #b9a898;
+  --accent: #33241b;
+  --accent-foreground: #f5f1eb;
+  --destructive: #ff7a6b;
+  --destructive-foreground: #140d0a;
+  --success: #6fd394;
+  --warning: #f2c14e;
+  --border: #33241b;
+  --input: #5a4334;
+  --ring: #f0b47e;
+  --gradient-hero: linear-gradient(128deg, #d28a4c 40%, #f5f1eb 140%);
+}
+
+@theme inline {
+  --font-sans: 'Roboto Mono', ui-monospace, monospace;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-surface: var(--surface);
+  --color-brand: var(--brand);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-shimmer: shimmer 1.6s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+  img {
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  .shimmer {
+    background-color: #261a14;
+    background-image: linear-gradient(90deg, #261a14 0%, #3a2a20 40%, #261a14 80%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+  /* Slider de faixa dupla: dois input[type=range] sobrepostos; só os "thumbs" recebem o ponteiro. */
+  .range-dual {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    appearance: none;
+    background: transparent;
+    pointer-events: none;
+    margin: 0;
+  }
+  .range-dual::-webkit-slider-thumb {
+    appearance: none;
+    pointer-events: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    background: var(--primary);
+    border: 2px solid var(--background);
+    cursor: pointer;
+  }
+  .range-dual::-moz-range-thumb {
+    pointer-events: auto;
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: var(--primary);
+    border: 2px solid var(--background);
+    cursor: pointer;
+  }
+  .range-dual:focus-visible {
+    outline: none;
+  }
+  .range-dual:focus-visible::-webkit-slider-thumb {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+  .range-dual:focus-visible::-moz-range-thumb {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+  .text-gradient {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .container-page {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1440px) {
+    .container-page {
+      padding-inline: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .shimmer {
+    animation: none;
+    background-image: none;
+  }
+}

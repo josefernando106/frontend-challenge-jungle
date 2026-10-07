@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#140d0a" />
+    <meta
+      name="description"
+      content="Kurio — descubra, colecione e compre NFTs de criadores emergentes e consagrados com pagamento em ETH."
+    />
+    <title>Kurio — Marketplace de NFTs</title>
+    <style>
+      /* App shell estático: pinta fundo e cabeçalho antes do JavaScript (substituído no primeiro render). */
+      html, body { margin: 0; background: #140d0a; color: #f5f1eb; }
+      .app-shell { height: 56px; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid rgba(245,241,235,.08);
+        font: 700 14px/1 'Roboto Mono', ui-monospace, monospace; letter-spacing: .08em; }
+      @media (min-width: 768px) { .app-shell { height: 64px; padding: 0 40px; } }
+    </style>
+  </head>
+  <body>
+    <div id="root"><div class="app-shell" aria-hidden="true">KURIO</div></div>
+    <noscript>Ative o JavaScript para usar a Kurio.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
